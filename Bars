@@ -1,0 +1,25 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main ()
+{
+	int t;
+	cin>>t;
+	while(t--){
+		int len,n;
+		cin>>len>>n;
+		vector<int>v(n);
+		for(int i=0;i<n;i++)
+			cin>>v[i];
+		bool find=false;
+		for(int i=0;i<(1<<n)&&!find;i++){
+			int sum=0;
+			for(int j=0;j<n;j++)
+				if(i&(1<<j))
+					sum+=v[j];
+			if(sum==len){ find = true ; break; }
+		}
+		if(find) puts("YES"); else puts("NO");
+	}
+	return 0;
+}
