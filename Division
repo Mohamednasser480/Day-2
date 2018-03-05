@@ -1,0 +1,46 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+bool valid(int i,int j);
+int main ()
+{
+	int n;
+	bool first_case=true;
+	while(cin>>n&&n){
+		if(first_case)first_case=false; else cout<<"\n";
+		vector<pair<int,int>>ans;
+		for(int i=1234;n*i<98765;i++){
+			if(valid(i,n*i))
+				ans.push_back(pair<int,int>(n*i,i));
+		}
+		if(ans.empty())cout<<"There are no solutions for "<<n<<".\n";
+		else 
+			for(auto it=ans.begin();it!=ans.end();it++){
+				cout<<it->first<<" / ";
+				if(it->second<10000)cout<<"0";
+				cout<<it->second<<" = "<<n<<endl;
+
+		}
+	}
+	return 0;
+}
+bool valid(int i,int j){
+	if(i<10000&&j<10000)return false;
+	if(i<10000) 
+		i*=10;
+	vector<int>v;
+	while(i>0){
+		v.push_back(i%10);
+		i/=10;
+	}
+	while(j>0){
+		v.push_back(j%10);
+		j/=10;
+	}
+	for(int i=0;i<v.size()-1;i++)
+		for(int j=i+1;j<v.size();j++)
+			if(v[i]==v[j])
+				return false;
+	return true;
+}
