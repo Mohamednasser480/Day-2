@@ -7,7 +7,7 @@ int main ()
 	int n;
 	bool first=true;
 	while(cin>>n&&n){
-		(first)?first=false:cout<<"\n";
+		if(first)first=false; else cout<<"\n";
 	vector<int>v(n);
 	vector<vector<int>>v1;
 	for(int i=0;i<n;i++)
@@ -23,7 +23,7 @@ int main ()
 		for(auto it=v1.begin();it!=v1.end();it++){
 			bool begin=true;
 			for(auto it1=it->begin();it1!=it->end();it1++){
-				(!begin)?cout<<" ":begin=false;
+				if(!begin)cout<<" "; else begin=false;
 				cout<<*it1;
 			      }
 			    cout<<endl;
