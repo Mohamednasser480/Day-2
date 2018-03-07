@@ -3,33 +3,38 @@
 #include<algorithm>
 #include<set>
 #include<string>
+#include<queue>
 using namespace std;
+bool cmd (int i,int j){ return (i>j);  }
 int main ()
 {
+	set<vector<int>>st;
+	priority_queue<vector<int>> q;
 	int n,m;
 	while(cin>>n>>m&&n){
 	vector<int>v(m);
-	 set<vector<int>>st;
 	for(int i=0;i<m;i++)
 		cin>>v[i];
 	for(int i=0;i<(1<<m);i++){
 		int sum=0;
 	     vector<int>v1;
 	for(int j=0;j<m;j++)
-		if(i&(1<<j)){sum+=v[j]; v1.push_back(v[j]); } 
-		if(sum==n)st.insert(v1);
+		if(i&(1<<j)){ sum+=v[j]; v1.push_back(v[j]); } 
+		if(sum==n){ sort(v1.begin(),v1.end(),cmd); q.push(v1);  }
 	   }
 	cout<<"Sums of "<<n<<":\n";
-	if(st.empty())cout<<"NONE\n"; 
-	else {
-		for(auto it =--st.end();it!=--st.begin();it--){
-			for(auto it1=it->begin();it1!=it->end();it1++){
-				if(it1++!=--it->end())cout<<*--it1<<"+";
-				else cout<<*--it1;
-			  }
-			cout<<"\n";
+	if(q.empty())cout<<"NONE\n"; 
+	else 
+		while(!q.empty()){
+			if(!st.count(q.top())){
+				for(int i=0;i<q.top().size();i++)
+					if(i+1<q.top().size())cout<<q.top()[i]<<"+";
+					else cout<<q.top()[i];
+					cout<<endl;
+					st.insert(q.top());
 			}
-	    }
+			q.pop();
+		 }
   }
 	return 0;
 }
