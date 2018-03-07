@@ -1,0 +1,29 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main ()
+{
+	int arr[3];
+	for(int i=0;i<3;i++)
+		arr[i]=0;
+	int x[3][3];
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++){
+			cin>>x[i][j];
+			arr[i]+=x[i][j];
+		}
+		int sum=arr[0]+arr[1]+arr[2];
+		x[0][0]=(sum-arr[0])%99999;
+		x[1][1]=(sum-arr[1])%99999;
+		x[2][2]=(sum-arr[2])%99999;
+		arr[0]+=x[0][0];
+		int n=x[0][0]+x[1][1]+x[2][2];
+		n=(n-arr[0])/2;
+		x[0][0]-=n; x[1][1]-=n; x[2][2]-=n;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++)
+				cout<<x[i][j]<<" ";
+			cout<<endl; 
+		}
+	return 0;
+}
