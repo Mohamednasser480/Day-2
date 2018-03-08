@@ -16,23 +16,23 @@ int main ()
 		if(n[0]==0)break;
 		bool find = false;
 		sort(n.begin(),n.end());
-		while(next_permutation(n.begin(),n.begin()+5)){
-		   for(int i=0;i<81&&!find;i++){
+	    do{ 
+			for(int i=0;i<v.size();i++){
 			   string s=v[i];
+			   //if(v[i]=="+-+-")cout<<"done\n";
 			   int sum=n[0];
 			   for(int j=0;j<4;j++){
 			   if(s[j]=='-')sum-=n[j+1];
 			   else if(s[j]=='+')sum+=n[j+1];
 			   else sum*=n[j+1];
 			   }
-			   //cout<<sum<<" "<<s<<endl;
-			   //cout<<s<<" "<<sum<<endl;
-			   if(sum==23){ find =true; break; } 
+			   if(sum==23){ find =true;/* break;*/ } 
 		   }
-	   }
+		}while(next_permutation(n.begin(),n.begin()+5));
 	   //if(find) myfile<<"Possible\n";else  myfile<<"Impossible\n";
 	  if(find)cout<<"Possible\n";else  cout<<"Impossible\n";
-    }
+	}
+	return 0;
 }
 void gen(vector<string>&v){
 	string ss="+-*";
